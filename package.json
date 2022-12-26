@@ -1,0 +1,20 @@
+{
+  "name": "demoblaze_automation",
+  "version": "1.0.0",
+  "description": "Testing for demoblaze page",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "keywords": [
+    "Automation",
+    "JavaScript",
+    "Cypress"
+  ],
+  "author": "anagarcia791",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^9.7.0",
+    "cypress-cucumber-preprocessor": "^4.3.1"
+  }
+}
