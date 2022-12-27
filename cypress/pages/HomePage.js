@@ -27,8 +27,8 @@ class HomePage {
     return cy.get(pageLocators.categoriesTitle);
   }
 
-  clickNavBarHomeOption() {
-    return this.getNavBarOption("Home").click();
+  clickNavBarOption(option) {
+    return this.getNavBarOption(option).click();
   }
 
   clickCarouselNextButton() {
