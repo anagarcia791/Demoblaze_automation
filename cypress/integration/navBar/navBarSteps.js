@@ -2,10 +2,12 @@ import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
 import HomePage from "../../pages/HomePage";
 import FormPopUp from "../../pages/components/formPopUp";
+import CartPage from "../../pages/CartPage";
 import commonData from "../../fixtures/commonData.json";
 
 const homePage = new HomePage();
 const formPopUp = new FormPopUp();
+const cartPage = new CartPage();
 
 Given("User visit the Demoblaze homepage", () => {
   cy.visit("/");
@@ -16,9 +18,10 @@ When("User clicks {string} link in navbar", (optionToClick) => {
 });
 
 Then("Sees home page", () => {
+  cy.url().should("contains", commonData.homeUrlComplement);
+
   homePage.getCategoriesTitle().as("categoriesTitle");
 
-  cy.url().should("contains", commonData.homeUrlComplement);
   cy.get("@categoriesTitle").should("be.visible");
 });
 
@@ -42,5 +45,14 @@ And("{string} form header title as {string}", (expectedForm, expectedFormTitle) 
       .then((formTitleText) => {
         expect(formTitleText).to.equal(expectedFormTitle);
       });
-  }
-);
+});
+
+Then("Cart page elements are visible", () => {
+  cy.url().should("contains", commonData.cartUrlComplement);
+
+  cartPage.getCartProductsTable().as("cartProductsTable");
+  cartPage.getPlaceOrderButton().as("placeOrderButton");
+
+  cy.get("@cartProductsTable").should("be.visible");
+  cy.get("@placeOrderButton").should("be.visible");
+});

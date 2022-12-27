@@ -19,7 +19,11 @@ Feature: Check navbar behaviour
     When User clicks "About us" link in navbar
     Then Sees form pop up
     And "About us" form header title as "About us"
-    
+
+  Scenario: Check that Cart option shows cart page
+    When User clicks "Cart" link in navbar
+    Then Cart page elements are visible
+
   Scenario: Check that Log in option shows specific pop up
     When User clicks "Log in" link in navbar
     Then Sees form pop up

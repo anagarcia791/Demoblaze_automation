@@ -1,3 +1,4 @@
 {
-  "homeUrlComplement": "/index.html"
+  "homeUrlComplement": "/index.html",
+  "cartUrlComplement": "/cart.html"
 }
