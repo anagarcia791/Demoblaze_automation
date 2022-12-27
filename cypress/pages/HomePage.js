@@ -11,8 +11,8 @@ class HomePage {
     return cy.get(pageLocators.navBarOptions).contains(option);
   }
 
-  getSliderActiveImage(costumerTimeout) {
-    return cy.get(pageLocators.sliderActiveImage, { timeout: costumerTimeout });
+  getSliderActiveImage() {
+    return cy.get(pageLocators.sliderActiveImage);
   }
 
   getCarouselNextButton() {
