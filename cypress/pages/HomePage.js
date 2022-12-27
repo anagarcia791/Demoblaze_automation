@@ -1,12 +1,18 @@
 const pageLocators = {
+  navBarOptions: ".nav-item",
   sliderActiveImage: "div[class*='carousel-item active'] img",
   carouselNextButton: ".carousel-control-next",
   carouselPrevButton: ".carousel-control-prev",
+  categoriesTitle: "#cat",
 };
 
 class HomePage {
-  getSliderActiveImage(costumerTimeout) {
-    return cy.get(pageLocators.sliderActiveImage, { timeout: costumerTimeout });
+  getNavBarOption(option) {
+    return cy.get(pageLocators.navBarOptions).contains(option);
+  }
+
+  getSliderActiveImage() {
+    return cy.get(pageLocators.sliderActiveImage);
   }
 
   getCarouselNextButton() {
@@ -15,6 +21,14 @@ class HomePage {
 
   getCarouselPrevButton() {
     return cy.get(pageLocators.carouselPrevButton);
+  }
+
+  getCategoriesTitle() {
+    return cy.get(pageLocators.categoriesTitle);
+  }
+
+  clickNavBarOption(option) {
+    return this.getNavBarOption(option).click();
   }
 
   clickCarouselNextButton() {

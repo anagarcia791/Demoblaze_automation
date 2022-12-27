@@ -11,7 +11,7 @@ Given("User visit the Demoblaze homepage", () => {
 
 When("User waits for carousel change its image", () => {
   cy.wait(6000);
-  homePage.getSliderActiveImage(0).as("secondImageShown");
+  homePage.getSliderActiveImage().as("secondImageShown");
 });
 
 Then("Sees a diferent image from the first one", () => {
@@ -25,13 +25,13 @@ Then("Sees a diferent image from the first one", () => {
 When("User clicks next button", () => {
   homePage.clickCarouselNextButton();
   cy.wait(1000);
-  homePage.getSliderActiveImage(0).as("imageShown");
+  homePage.getSliderActiveImage().as("imageShown");
 });
 
 When("User clicks previous button", () => {
   homePage.clickCarouselPrevButton();
   cy.wait(1000);
-  homePage.getSliderActiveImage(0).as("imageShown");
+  homePage.getSliderActiveImage().as("imageShown");
 });
 
 Then("Sees {string} slide", (slideToCheck) => {
