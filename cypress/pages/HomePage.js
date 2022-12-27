@@ -1,8 +1,9 @@
 const pageLocators = {
+  navBarOptions: ".nav-item",
   sliderActiveImage: "div[class*='carousel-item active'] img",
   carouselNextButton: ".carousel-control-next",
   carouselPrevButton: ".carousel-control-prev",
-  navBarOptions: ".nav-item",
+  categoriesTitle: "#cat",
 };
 
 class HomePage {
@@ -20,6 +21,10 @@ class HomePage {
 
   getCarouselPrevButton() {
     return cy.get(pageLocators.carouselPrevButton);
+  }
+
+  getCategoriesTitle() {
+    return cy.get(pageLocators.categoriesTitle);
   }
 
   clickNavBarHomeOption() {

@@ -10,8 +10,10 @@ Given("User visit the Demoblaze homepage", () => {
 
 When("User clicks Home link in navbar", () => {
   homePage.clickNavBarHomeOption();
+  homePage.getCategoriesTitle().as("categoriesTitle");
 });
 
 Then("Sees home page", () => {
   cy.url().should("contains", "/index.html");
+  cy.get("@categoriesTitle").should("be.visible");
 });
