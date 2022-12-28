@@ -4,6 +4,8 @@ const pageLocators = {
   carouselNextButton: ".carousel-control-next",
   carouselPrevButton: ".carousel-control-prev",
   categoriesTitle: "#cat",
+  categoryOptions: ".list-group #itemc",
+  categoryItems: "#tbodyid .card",
 };
 
 class HomePage {
@@ -27,16 +29,33 @@ class HomePage {
     return cy.get(pageLocators.categoriesTitle);
   }
 
+  getCategoryOptions() {
+    return cy.get(pageLocators.categoryOptions);
+  }
+
+  getCategoryItems() {
+    return cy.get(pageLocators.categoryItems);
+  }
+
   clickNavBarOption(option) {
     return this.getNavBarOption(option).click();
   }
 
-  clickCarouselNextButton() {
+  clickCarouselButton(buttonToClick) {
+    if (buttonToClick === "previous") {
+      return this.getCarouselPrevButton().click();
+    }
     return this.getCarouselNextButton().click();
   }
 
-  clickCarouselPrevButton() {
-    return this.getCarouselPrevButton().click();
+  clickCategoryOptionRandomly(optionToClick) {
+    return cy.get(`.list-group :nth-child(${optionToClick + 1})`).click();
+  }
+
+  clickCategoryItemRandomly(itemToClick) {
+    return cy
+      .get(`#tbodyid :nth-child(${itemToClick}) .card a :nth-child(1)`)
+      .click();
   }
 }
 export default HomePage;

@@ -38,13 +38,13 @@ Then("Sees form pop up", () => {
 });
 
 And("{string} form header title as {string}", (expectedForm, expectedFormTitle) => {
-    formPopUp.getFormTitle(expectedForm).as("formTitle");
+  formPopUp.getFormTitle(expectedForm).as("formTitle");
 
-    cy.get("@formTitle")
-      .invoke("text")
-      .then((formTitleText) => {
-        expect(formTitleText).to.equal(expectedFormTitle);
-      });
+  cy.get("@formTitle")
+    .invoke("text")
+    .then((formTitleText) => {
+      expect(formTitleText).to.equal(expectedFormTitle);
+    });
 });
 
 Then("Cart page elements are visible", () => {

@@ -22,14 +22,8 @@ Then("Sees a diferent image from the first one", () => {
     });
 });
 
-When("User clicks next button", () => {
-  homePage.clickCarouselNextButton();
-  cy.wait(1000);
-  homePage.getSliderActiveImage().as("imageShown");
-});
-
-When("User clicks previous button", () => {
-  homePage.clickCarouselPrevButton();
+When("User clicks {string} button", (buttonToClick) => {
+  homePage.clickCarouselButton(buttonToClick);
   cy.wait(1000);
   homePage.getSliderActiveImage().as("imageShown");
 });
