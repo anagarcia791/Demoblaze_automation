@@ -41,12 +41,11 @@ class HomePage {
     return this.getNavBarOption(option).click();
   }
 
-  clickCarouselNextButton() {
+  clickCarouselButton(buttonToClick) {
+    if (buttonToClick === "previous") {
+      return this.getCarouselPrevButton().click();
+    }
     return this.getCarouselNextButton().click();
-  }
-
-  clickCarouselPrevButton() {
-    return this.getCarouselPrevButton().click();
   }
 
   clickCategoryOptionRandomly(optionToClick) {

@@ -11,9 +11,9 @@ Feature: Check carousel behaviour
     Then Sees a diferent image from the first one
 
   Scenario: User clicks carousel to next slide
-    When User clicks next button
+    When User clicks "next" button
     Then Sees "second" slide
 
   Scenario: User clicks carousel to previous slide
-    When User clicks previous button
+    When User clicks "previous" button
     Then Sees "third" slide
