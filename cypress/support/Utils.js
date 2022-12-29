@@ -1,7 +1,5 @@
-class Utils {
-  getRandomNumber(maxNumber) {
-    return Math.floor(Math.random() * maxNumber + 1);
-  }
-}
+const getRandomNumber = (maxNumber) => {
+  return Math.floor(Math.random() * maxNumber + 1);
+};
 
-module.exports = new Utils();
+module.exports = { getRandomNumber };

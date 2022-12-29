@@ -1,16 +1,12 @@
-import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import { When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
 import HomePage from "../../pages/HomePage";
 import ProductPage from "../../pages/ProductPage";
-import utils from "../../support/utils";
-import commonData from "../../fixtures/commonData.json";
+import { getRandomNumber } from "../../support/utils";
+import urlsData from "../../fixtures/urlsData.json";
 
 const homePage = new HomePage();
 const productPage = new ProductPage();
-
-Given("User visit the Demoblaze homepage", () => {
-  cy.visit("/");
-});
 
 When("User clicks a specific category", () => {
   homePage.getCategoryOptions().as("optionList");
@@ -18,7 +14,7 @@ When("User clicks a specific category", () => {
   cy.get("@optionList")
     .its("length")
     .then((listLength) => {
-      const optionToClick = utils.getRandomNumber(listLength);
+      const optionToClick = getRandomNumber(listLength);
       homePage.clickCategoryOptionRandomly(optionToClick);
     });
 
@@ -31,13 +27,13 @@ And("Clicks a specific item", () => {
   cy.get("@itemList")
     .its("length")
     .then((listLength) => {
-      const itemToClick = utils.getRandomNumber(listLength);
+      const itemToClick = getRandomNumber(listLength);
       homePage.clickCategoryItemRandomly(itemToClick);
     });
 });
 
 Then("Sees new page with product info", () => {
-  cy.url().should("contains", commonData.productSelectedUrlComplement);
+  cy.url().should("contains", urlsData.productSelectedURL);
 
   productPage.getProductContenedor().as("productContenedor");
   productPage.getAddToCartButton().as("addToCartButton");

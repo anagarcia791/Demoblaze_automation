@@ -1,13 +1,9 @@
-import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
+import { When, Then } from "cypress-cucumber-preprocessor/steps";
 
 import HomePage from "../../pages/HomePage";
-import carouselData from "../../fixtures/carousel.json";
+import carouselData from "../../fixtures/carouselData.json";
 
 const homePage = new HomePage();
-
-Given("User visit the Demoblaze homepage", () => {
-  cy.visit("/");
-});
 
 When("User waits for carousel change its image", () => {
   cy.wait(6000);
