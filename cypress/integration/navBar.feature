@@ -5,6 +5,7 @@ Feature: Check navbar behaviour
 
   Background:
     Given User visit the Demoblaze homepage
+    And Fixture's data is instantiated
 
   Scenario: Check that Home option is the first page shown
     When User clicks "Home" link in navbar

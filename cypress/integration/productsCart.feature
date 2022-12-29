@@ -5,6 +5,11 @@ Feature: Check products cart behaviour
 
   Background:
     Given User visit the Demoblaze homepage
+    And Fixture's data is instantiated
+
+  Scenario: Check home page contains default products to show
+    When User checks default shown products through the API response
+    Then The quantity of shown products must be 9
 
   Scenario: Check item selection is correctly done
     When User clicks a specific category

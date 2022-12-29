@@ -58,4 +58,5 @@ class HomePage {
       .click();
   }
 }
-export default HomePage;
+
+export default new HomePage();

@@ -26,4 +26,5 @@ class CartPage {
     return this.getPlaceOrderButton().click();
   }
 }
-export default CartPage;
+
+export default new CartPage();

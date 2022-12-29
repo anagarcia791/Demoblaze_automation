@@ -5,6 +5,7 @@ Feature: Check carousel behaviour
 
   Background:
     Given User visit the Demoblaze homepage
+    And Fixture's data is instantiated
 
   Scenario: Check that carousel changes image by itself
     When User waits for carousel change its image

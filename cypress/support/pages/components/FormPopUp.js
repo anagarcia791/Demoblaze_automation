@@ -45,4 +45,5 @@ class FormPopUp {
     }
   }
 }
-export default FormPopUp;
+
+export default new FormPopUp();
