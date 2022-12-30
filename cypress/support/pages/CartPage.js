@@ -22,6 +22,12 @@ class CartPage {
     return cy.get(pageLocators.placeOrderButton);
   }
 
+  clickDeleteFromCartButton(productPosition) {
+    return cy
+      .get(`#tbodyid :nth-child(${productPosition}) a[onClick*='deleteItem']`)
+      .click();
+  }
+
   clickPlaceOrderButton() {
     return this.getPlaceOrderButton().click();
   }

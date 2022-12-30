@@ -4,7 +4,11 @@
   "description": "Testing for demoblaze page",
   "main": "index.js",
   "scripts": {
-    "test": "npx cypress open"
+    "test": "npx cypress open",
+    "headless": "npx cypress run",
+    "regression": "npx cypress run -e TAGS=@regression",
+    "smoke": "npx cypress run -e TAGS=@smoke",
+    "sanity": "npx cypress run -e TAGS=@sanity"
   },
   "keywords": [
     "Automation",

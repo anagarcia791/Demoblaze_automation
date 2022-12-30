@@ -7,11 +7,27 @@ Feature: Check products cart behaviour
     Given User visit the Demoblaze homepage
     And Fixture's data is instantiated
 
+  @regression @smoke @sanity
   Scenario: Check home page contains default products to show
     When User checks default shown products through the API response
     Then The quantity of shown products must be 9
 
-  Scenario: Check item selection is correctly done
-    When User clicks a specific category
-    And Clicks a specific item
-    Then Sees new page with product info
+  @regression @smoke @sanity
+  Scenario: Check category and item selection is correctly done
+    When User clicks a category
+    And Clicks a item
+    Then Sees new page with product detail info
+
+  @regression @smoke @sanity
+  Scenario: Add product to shopping cart
+    Given User is in a product detail info page
+    When Clicks add to cart button
+    And User clicks "Cart" link in navbar
+    Then 1 products should be in the shopping cart
+
+  @regression @smoke @sanity
+  Scenario: Delete product from shopping cart
+    Given User adds 2 product to shopping cart
+    And User clicks "Cart" link in navbar
+    When Clicks delete product n° 2 button
+    Then 1 products should be in the shopping cart

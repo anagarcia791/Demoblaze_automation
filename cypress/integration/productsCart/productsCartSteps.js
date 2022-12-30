@@ -1,8 +1,7 @@
-import { When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
 
-import HomePage from "../../support/pages/HomePage";
 import ProductPage from "../../support/pages/ProductPage";
-import { getRandomNumber } from "../../support/utils";
+import CartPage from "../../support/pages/CartPage";
 
 And("Fixture's data is instantiated", () => {
   cy.fixture("urlsData").as("urlsData");
@@ -10,16 +9,7 @@ And("Fixture's data is instantiated", () => {
 });
 
 When("User checks default shown products through the API response", () => {
-  let defaultProducts = [];
-  cy.get("@servicesData").then((services) => {
-    cy.request("GET", services.defaultProducts)
-      .then((response) => {
-        defaultProducts = response.body.Items;
-      })
-      .then(() => {
-        cy.wrap(defaultProducts).as("defaultProducts");
-      });
-  });
+  cy.GetDefaultProducts();
 });
 
 Then("The quantity of shown products must be {int}", (expectedQuantity) => {
@@ -30,31 +20,15 @@ Then("The quantity of shown products must be {int}", (expectedQuantity) => {
     });
 });
 
-When("User clicks a specific category", () => {
-  HomePage.getCategoryOptions().as("optionList");
-
-  cy.get("@optionList")
-    .its("length")
-    .then((listLength) => {
-      const optionToClick = getRandomNumber(listLength);
-      HomePage.clickCategoryOptionRandomly(optionToClick);
-    });
-
-  cy.wait(1000);
+When("User clicks a category", () => {
+  cy.ClickCategory();
 });
 
-And("Clicks a specific item", () => {
-  HomePage.getCategoryItems().as("itemList");
-
-  cy.get("@itemList")
-    .its("length")
-    .then((listLength) => {
-      const itemToClick = getRandomNumber(listLength);
-      HomePage.clickCategoryItemRandomly(itemToClick);
-    });
+And("Clicks a item", () => {
+  cy.ClickItem();
 });
 
-Then("Sees new page with product info", () => {
+Then("Sees new page with product detail info", () => {
   cy.get("@urlsData").then((urls) => {
     cy.url().should("contains", urls.productSelectedURL);
   });
@@ -64,4 +38,35 @@ Then("Sees new page with product info", () => {
 
   cy.get("@productContenedor").should("be.visible");
   cy.get("@addToCartButton").should("be.visible");
+});
+
+Given("User is in a product detail info page", () => {
+  cy.ClickCategory();
+  cy.ClickItem();
+});
+
+When("Clicks add to cart button", () => {
+  ProductPage.clickAddToCartButton();
+});
+
+Then(
+  "{int} products should be in the shopping cart",
+  (expectedProductQuantityInCart) => {
+    CartPage.getItemsToBuy().as("itemsToBuy");
+
+    cy.get("@itemsToBuy")
+      .its("length")
+      .then((listLength) => {
+        expect(expectedProductQuantityInCart).to.equal(listLength);
+      });
+  }
+);
+
+Given("User adds {int} product to shopping cart", (quantityToAdd) => {
+  cy.AddMoreThanOneProduct(quantityToAdd);
+});
+
+When("Clicks delete product n° {int} button", (productToDelete) => {
+  CartPage.clickDeleteFromCartButton(productToDelete);
+  cy.wait(1000)
 });
