@@ -1,4 +1,6 @@
 {
+  "video": false,
+  "trashAssetsBeforeRuns": true,
   "baseUrl": "https://www.demoblaze.com",
   "testFiles": "**/*.feature"
 }

@@ -8,7 +8,9 @@
     "headless": "npx cypress run",
     "regression": "npx cypress run -e TAGS=@regression",
     "smoke": "npx cypress run -e TAGS=@smoke",
-    "sanity": "npx cypress run -e TAGS=@sanity"
+    "sanity": "npx cypress run -e TAGS=@sanity",
+    "allure": "npx cypress run --env allure=true",
+    "allure-results": "allure serve allure-results/"
   },
   "keywords": [
     "Automation",
@@ -19,6 +21,8 @@
   "author": "anagarcia791",
   "license": "ISC",
   "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.34.0",
+    "allure-commandline": "^2.20.1",
     "cypress": "^9.7.0",
     "cypress-cucumber-preprocessor": "^4.3.1"
   },
