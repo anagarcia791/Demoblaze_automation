@@ -1,35 +1,28 @@
-import { Given, When, Then, And } from "cypress-cucumber-preprocessor/steps";
+import { Then, And } from "cypress-cucumber-preprocessor/steps";
 
-import HomePage from "../../pages/HomePage";
-import FormPopUp from "../../pages/components/formPopUp";
-import CartPage from "../../pages/CartPage";
-import commonData from "../../fixtures/commonData.json";
+import HomePage from "../../support/pages/HomePage";
+import FormPopUp from "../../support/pages/components/FormPopUp";
+import CartPage from "../../support/pages/CartPage";
 
-const homePage = new HomePage();
-const formPopUp = new FormPopUp();
-const cartPage = new CartPage();
-
-Given("User visit the Demoblaze homepage", () => {
-  cy.visit("/");
-});
-
-When("User clicks {string} link in navbar", (optionToClick) => {
-  homePage.clickNavBarOption(optionToClick);
+And("Fixture's data is instantiated", () => {
+  cy.fixture("urlsData").as("urlsData");
 });
 
 Then("Sees home page", () => {
-  cy.url().should("contains", commonData.homeUrlComplement);
+  cy.get("@urlsData").then((urls) => {
+    cy.url().should("contains", urls.alternativeHomeURL);
+  });
 
-  homePage.getCategoriesTitle().as("categoriesTitle");
+  HomePage.getCategoriesTitle().as("categoriesTitle");
 
   cy.get("@categoriesTitle").should("be.visible");
 });
 
 Then("Sees form pop up", () => {
-  formPopUp.getModalContainer().as("modalContainer");
-  formPopUp.getModalHeader().as("modalHeader");
-  formPopUp.getModalBody().as("modalBody");
-  formPopUp.getModalFooter().as("modalFooter");
+  FormPopUp.getModalContainer().as("modalContainer");
+  FormPopUp.getModalHeader().as("modalHeader");
+  FormPopUp.getModalBody().as("modalBody");
+  FormPopUp.getModalFooter().as("modalFooter");
 
   cy.get("@modalContainer").should("be.visible");
   cy.get("@modalHeader").should("be.visible");
@@ -38,7 +31,7 @@ Then("Sees form pop up", () => {
 });
 
 And("{string} form header title as {string}", (expectedForm, expectedFormTitle) => {
-  formPopUp.getFormTitle(expectedForm).as("formTitle");
+  FormPopUp.getFormTitle(expectedForm).as("formTitle");
 
   cy.get("@formTitle")
     .invoke("text")
@@ -48,10 +41,12 @@ And("{string} form header title as {string}", (expectedForm, expectedFormTitle) 
 });
 
 Then("Cart page elements are visible", () => {
-  cy.url().should("contains", commonData.cartUrlComplement);
+  cy.get("@urlsData").then((urls) => {
+    cy.url().should("contains", urls.cartURL);
+  });
 
-  cartPage.getCartProductsTable().as("cartProductsTable");
-  cartPage.getPlaceOrderButton().as("placeOrderButton");
+  CartPage.getCartProductsTable().as("cartProductsTable");
+  CartPage.getPlaceOrderButton().as("placeOrderButton");
 
   cy.get("@cartProductsTable").should("be.visible");
   cy.get("@placeOrderButton").should("be.visible");

@@ -5,15 +5,19 @@ Feature: Check carousel behaviour
 
   Background:
     Given User visit the Demoblaze homepage
+    And Fixture's data is instantiated
 
+  @regression
   Scenario: Check that carousel changes image by itself
     When User waits for carousel change its image
     Then Sees a diferent image from the first one
 
+  @regression
   Scenario: User clicks carousel to next slide
     When User clicks "next" button
     Then Sees "second" slide
-
+  
+  @regression
   Scenario: User clicks carousel to previous slide
     When User clicks "previous" button
     Then Sees "third" slide

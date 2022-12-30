@@ -1,37 +1,39 @@
-import { Given, When, Then } from "cypress-cucumber-preprocessor/steps";
+import { When, Then } from "cypress-cucumber-preprocessor/steps";
 
-import HomePage from "../../pages/HomePage";
-import carouselData from "../../fixtures/carousel.json";
+import HomePage from "../../support/pages/HomePage";
 
-const homePage = new HomePage();
-
-Given("User visit the Demoblaze homepage", () => {
-  cy.visit("/");
+And("Fixture's data is instantiated", () => {
+  cy.fixture("carouselData").as("carouselData");
 });
 
 When("User waits for carousel change its image", () => {
   cy.wait(6000);
-  homePage.getSliderActiveImage().as("secondImageShown");
+  HomePage.getSliderActiveImage().as("secondImageShown");
 });
 
 Then("Sees a diferent image from the first one", () => {
-  cy.get("@secondImageShown")
-    .should("have.attr", "src")
-    .then((srcText) => {
-      expect(srcText).to.not.equal(carouselData.firstSlideSrc);
-    });
+  cy.get("@carouselData").then((imageSrc) => {
+    cy.get("@secondImageShown")
+      .should("have.attr", "src")
+      .then((srcText) => {
+        expect(srcText).to.not.equal(imageSrc.firstSlideSrc);
+      });
+  });
 });
 
 When("User clicks {string} button", (buttonToClick) => {
-  homePage.clickCarouselButton(buttonToClick);
+  HomePage.clickCarouselButton(buttonToClick);
   cy.wait(1000);
-  homePage.getSliderActiveImage().as("imageShown");
 });
 
 Then("Sees {string} slide", (slideToCheck) => {
-  cy.get("@imageShown")
-    .should("have.attr", "src")
-    .then((srcText) => {
-      expect(srcText).to.equal(carouselData[slideToCheck + "SlideSrc"]);
-    });
+  HomePage.getSliderActiveImage().as("imageShown");
+
+  cy.get("@carouselData").then((imageSrc) => {
+    cy.get("@imageShown")
+      .should("have.attr", "src")
+      .then((srcText) => {
+        expect(srcText).to.equal(imageSrc[slideToCheck + "SlideSrc"]);
+      });
+  });
 });

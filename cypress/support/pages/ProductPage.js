@@ -16,4 +16,5 @@ class ProductPage {
     return this.getAddToCartButton().click();
   }
 }
-export default ProductPage;
+
+export default new ProductPage();
