@@ -18,7 +18,7 @@ Create a framework for scratch using cypress (any version), cucumber, and allure
 
 ## Architecture diagram
 
-![Architecture diagram]()
+![Architecture diagram](https://raw.githubusercontent.com/anagarcia791/Demoblaze_automation/cart_feature/assets/images/architecture_diagram.png)
 
 ## Documentation
 - [Cypress](https://docs.cypress.io/guides/overview/why-cypress)
