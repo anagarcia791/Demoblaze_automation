@@ -6,6 +6,7 @@ import CartPage from "../../support/pages/CartPage";
 And("Fixture's data is instantiated", () => {
   cy.fixture("urlsData").as("urlsData");
   cy.fixture("servicesData").as("servicesData");
+  cy.fixture("placeOrderData").as("placeOrderData");
 });
 
 When("User checks default shown products through the API response", () => {
@@ -64,9 +65,34 @@ Then(
 
 Given("User adds {int} product to shopping cart", (quantityToAdd) => {
   cy.AddMoreThanOneProduct(quantityToAdd);
+  cy.wait(1000);
 });
 
 When("Clicks delete product n° {int} button", (productToDelete) => {
   CartPage.clickDeleteFromCartButton(productToDelete);
-  cy.wait(1000)
+  cy.wait(1000);
+});
+
+When("Clicks place order button", () => {
+  CartPage.clickPlaceOrderButton();
+});
+
+And("Fills all needed data for purchase", () => {
+  cy.get("@placeOrderData").then((orderData) => {
+    CartPage.typeOnNameInput(orderData.name);
+    CartPage.typeOnCountryInput(orderData.country);
+    CartPage.typeOnCityInput(orderData.city);
+    CartPage.typeOnCreditCardInput(orderData.card);
+    CartPage.typeOnMonthInput(orderData.month);
+    CartPage.typeOYearInput(orderData.year);
+  });
+});
+
+And("Clicks purchase button and confirm button", () => {
+  CartPage.clickPurchaseButton();
+  CartPage.clickConfirmButton();
+});
+
+Then("Shopping cart must be cleaned", () => {
+  cy.wait("@deleteCartResponse").its("response.statusCode").should("eq", 200);
 });

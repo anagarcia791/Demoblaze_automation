@@ -1,3 +1,4 @@
 {
-  "defaultProducts": "https://api.demoblaze.com/entries"
+  "defaultProducts": "https://api.demoblaze.com/entries",
+  "deleteCart": "https://api.demoblaze.com/deletecart"
 }

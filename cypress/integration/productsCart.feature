@@ -31,3 +31,12 @@ Feature: Check products cart behaviour
     And User clicks "Cart" link in navbar
     When Clicks delete product n° 2 button
     Then 1 products should be in the shopping cart
+
+  @regression @smoke @sanity
+  Scenario: Buying process
+    Given User adds 1 product to shopping cart
+    And User clicks "Cart" link in navbar
+    When Clicks place order button
+    And Fills all needed data for purchase
+    And Clicks purchase button and confirm button
+    Then Shopping cart must be cleaned
